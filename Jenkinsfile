@@ -8,7 +8,7 @@ pipeline {
         }
         stage('deploy'){
             steps {
-                sh 'sam deploy --stack-name sam-app -t template.yaml --s3-bucket sam-jenkins-demo-us-west-2-subhayandpwc --region us-east-1 --capabilities CAPABILITY_IAM --confirm-changeset true --image-repositories LambdaFunctionWithAPI=940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp' //--no-confirm-changeset --no-fail-on-empty-changeset'
+                sh 'sam deploy --stack-name sam-app -t template.yaml --s3-bucket sam-jenkins-demo-us-west-2-subhayandpwc --region us-east-1 --capabilities CAPABILITY_IAM --confirm-changeset true --image-repository docker-lambda-testapp' //--no-confirm-changeset --no-fail-on-empty-changeset'
             }
         }
     }
