@@ -8,7 +8,7 @@ pipeline {
         }
         stage('deploy'){
             steps {
-                sh 'sam deploy'  // --no-confirm-changeset --no-fail-on-empty-changeset'
+                sh 'sam deploy --guided'  // --no-confirm-changeset --no-fail-on-empty-changeset'
             }
         }
     }
