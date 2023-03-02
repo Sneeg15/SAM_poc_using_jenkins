@@ -11,9 +11,17 @@ pipeline {
                 sh 'sam package --output-template-file packaged-template.yaml --image-repository 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
             }
         }
-        stage('qualys-scan'){
+        stage('get image id'){
             steps{
-                getImageVulnsFromQualys imageIds: 'lambdafunctionwithapi-1cd246604ecc-python3.7-v1', useGlobalConfig: true
+                script{
+                    def IMAGE_ID = sh(script: "grep -w ImageUri packaged.yaml | cut -d: -f3")
+                    env.IMAGE_ID =IMAGE_ID
+                }
+            }
+        }
+        stage('Qualys scan'){
+            steps{
+                getImageVulnsFromQualys useGlobalConfig:true, imageIds: env.IMAGE_ID
             }
         }
         stage('deploy'){
