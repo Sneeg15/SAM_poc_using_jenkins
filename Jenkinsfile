@@ -21,7 +21,7 @@ pipeline {
       //  }
         stage('Qualys scan'){
             steps{
-                getImageVulnsFromQualys useGlobalConfig:true, imageIds: env.IMAGE_ID
+                getImageVulnsFromQualys useGlobalConfig:true, imageIds: 1cd246604ecc//env.IMAGE_ID
             }
         }
         stage('deploy'){
