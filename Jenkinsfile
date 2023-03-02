@@ -13,7 +13,7 @@ pipeline {
         }
         stage('qualys-scan'){
             steps{
-                getImageVulnsFromQualys imageIDs: 'lambdafunctionwithapi-1cd246604ecc-python3.7-v1', useGlobalConfig: true
+                getImageVulnsFromQualys imageIds: 'lambdafunctionwithapi-1cd246604ecc-python3.7-v1', useGlobalConfig: true
             }
         }
         stage('deploy'){
