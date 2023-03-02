@@ -14,7 +14,7 @@ pipeline {
         stage('get image id'){
             steps{
                 script{
-                    def IMAGE_ID = sh(script: "grep -w ImageUri packaged.yaml | cut -d: -f3")
+                    def IMAGE_ID = sh(script: "grep -w ImageUri packaged-template.yaml | cut -d: -f3")
                     env.IMAGE_ID =IMAGE_ID
                 }
             }
