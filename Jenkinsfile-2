@@ -43,12 +43,12 @@ pipeline {
         stage('sign the container image'){
             steps{
                 sh 'cosign version'
-                sh 'cosign sign --key $COSIGN_PRIVATE_KEY --upload=true 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp:lambdafunctionwithapi-1cd246604ecc-python3.7-v1'
+                sh 'cosign sign --key $COSIGN_PRIVATE_KEY --upload=true 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
             }
         }
         stage('verify the container image'){
             steps{
-                sh 'cosign verify-attestation --key $COSIGN_PUBLIC_KEY 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp:lambdafunctionwithapi-1cd246604ecc-python3.7-v1'
+                sh 'cosign verify --key $COSIGN_PUBLIC_KEY 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp:lambdafunctionwithapi-1cd246604ecc-python3.7-v1'
             }
         }    
     }
