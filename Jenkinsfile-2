@@ -11,9 +11,10 @@ pipeline {
             steps{
                 withCredentials([file(credentialsId: 'cosign-public-key', variable: 'my_public_key')])
                 {
-                    sh "cp ${my_public_key} my_public_key.pub"
+                    sh "mkdir key"
+                    sh "cp ${my_public_key} ./key/my_public_key.pub"
                     //sh "cp ${my_private_key} my_private_key.key"
-                    sh "cat my_public_key.pub"
+                    sh "cat ./key/my_public_key.pub"
                     //sh "cat my_private_key.key"
                     sh "echo $my_public_key"
                     //sh "echo $my_private_key"
@@ -21,8 +22,9 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialId: 'cosign-private-key-with-password', keyFileVariable: 'my_private_key')])
                 {
                     sh "echo $my_private_key"
-                    sh "cp ${my_private_key} my_private_key.key"
-                    sh "cat my_private_key.key"
+                    
+                    sh "cp ${my_private_key} ./key/my_private_key.key"
+                    sh "cat ./key/my_private_key.key"
                     
                 }
             }
