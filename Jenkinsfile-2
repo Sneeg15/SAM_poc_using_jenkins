@@ -11,8 +11,8 @@ pipeline {
             steps{
                 withCredentials([file(credentialsId: 'cosign-private-key', variable: 'my-private-key'), file(credentialsId: 'cosign-public-key', variable: 'my-public-key')])
                 {
-                    sh "cp \$my-public-key my-public-key.pub"
-                    sh "cp \$my-private-key my-private-key.key"
+                    sh "cp ${my-public-key} my-public-key.pub"
+                    sh "cp ${my-private-key} my-private-key.key"
                     sh "cat my-public-key.pub"
                     sh "cat my-private-key.key"
                     sh "echo $my-public-key"
