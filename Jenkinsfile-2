@@ -12,7 +12,7 @@ pipeline {
                 //sh 'cat COSIGN_PRIVATE_KEY'
                 //sh 'cat COSIGN_PUBLIC_KEY'
                 sh 'cat cosign.key'
-                sh 'cat cosign.pub
+                sh 'cat cosign.pub'
             }
         }
         stage('authentication'){
