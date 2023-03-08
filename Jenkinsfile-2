@@ -20,7 +20,11 @@ pipeline {
                 }
                 withCredentials([sshUserPrivateKey(credentialId: 'cosign-private-key-with-password', keyFileVariable: 'my_private_key'
                 {
-                    sh "scp -i ${my_private_key} do sth here"
+                    
+                    sh "cat my_private_key.key"
+                    sh "cp ${my_private_key} my_private_key.key"
+                    sh "echo $my_private_key"
+                    
                 }
             }
         }
