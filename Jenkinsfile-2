@@ -65,7 +65,7 @@ pipeline {
                     sh "cat ./key/my_private_key.key"
                    
                     sh 'cosign version'
-                    sh 'cosign sign --key ${my_private_key} COSIGN_PASSWORD=password123 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
+                    sh 'COSIGN_PASSWORD=password123 cosign sign --key ${my_private_key} 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
                     
                 }
             }
