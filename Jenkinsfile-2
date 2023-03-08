@@ -19,7 +19,7 @@ pipeline {
                     sh "echo $my_public_key"
                     //sh "echo $my_private_key"
                 }
-                withCredentials([sshUserPrivateKey(credentialId: 'cosign-private-key-with-password', keyFileVariable: 'my_private_key')])
+                withCredentials([sshUserPrivateKey(credentialsId: 'cosign-private-key-with-password', keyFileVariable: 'my_private_key')])
                 {
                     sh "echo $my_private_key"
                     
