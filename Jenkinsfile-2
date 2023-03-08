@@ -9,10 +9,10 @@ pipeline {
     stages {
         stage('verification'){
             steps{
-                //sh 'cat COSIGN_PRIVATE_KEY'
-                //sh 'cat COSIGN_PUBLIC_KEY'
-                //sh 'cat cosign.key'
-                //sh 'cat cosign.pub'
+                withCredentials([file(credentialsId: 'COSIGN_PRIVATE_KEY', variable: 'my-private-key'), file(credentialsId: 'COSIGN_PUBLIC_KEY', variable: 'my-public-key')]){
+                    sh "cp \$my-public-key /src/main/resources/my-public-key.pub"
+                    sh "cp \$my-private-key /src/main/resources/my-private-key.key"
+                }
             }
         }
         stage('authentication'){
