@@ -11,7 +11,7 @@ pipeline {
             steps{
                 withCredentials([file(credentialsId: 'cosign-public-key', variable: 'my_public_key')])
                 {
-                    sh "mkdir key"
+                    //sh "mkdir key"
                     sh "cp ${my_public_key} ./key/my_public_key.pub"
                     //sh "cp ${my_private_key} my_private_key.key"
                     sh "cat ./key/my_public_key.pub"
