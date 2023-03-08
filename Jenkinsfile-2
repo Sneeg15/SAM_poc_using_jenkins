@@ -1,15 +1,15 @@
 pipeline {
     agent any 
-    environment{
-        COSIGN_PASSWORD=credentials('cosign-password')
-        COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
-        COSIGN_PUBLIC_KEY=credentials('cosign-public-key')
-    }
+    //environment{
+      //  COSIGN_PASSWORD=credentials('cosign-password')
+      //  COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
+      //  COSIGN_PUBLIC_KEY=credentials('cosign-public-key')
+  //  }
         
     stages {
         stage('verification'){
             steps{
-                withCredentials([file(credentialsId: 'COSIGN_PRIVATE_KEY', variable: 'my-private-key'), file(credentialsId: 'COSIGN_PUBLIC_KEY', variable: 'my-public-key')])
+                withCredentials([file(credentialsId: 'cosign-private-key', variable: 'my-private-key'), file(credentialsId: 'cosign-public-key', variable: 'my-public-key')])
                 {
                     sh "cp \$my-public-key my-public-key.pub"
                     sh "cp \$my-private-key my-private-key.key"
