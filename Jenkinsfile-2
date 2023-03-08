@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Qualys scan'){
             steps{
-                getImageVulnsFromQualys useGlobalConfig:true, imageIds: 'sha256:a93a1f9ataf98ff31466d389920abe86aa030c924e418012b99e497ff93dc51f'
+                getImageVulnsFromQualys useGlobalConfig:true, imageIds: '1cd246604ecc'//'sha256:a93a1f9ataf98ff31466d389920abe86aa030c924e418012b99e497ff93dc51f'
             }
         }
         stage('deploy'){
