@@ -19,14 +19,7 @@ pipeline {
                     sh "echo $my_public_key"
                     //sh "echo $my_private_key"
                 }
-                withCredentials([sshUserPrivateKey(credentialsId: 'cosign-private-key-with-password', keyFileVariable: 'my_private_key')])
-                {
-                    sh "echo $my_private_key"
-                    
-                    sh "cp ${my_private_key} ./key/my_private_key.key"
-                    sh "cat ./key/my_private_key.key"
-                    
-                }
+                
             }
         }
         stage('authentication'){
@@ -64,6 +57,14 @@ pipeline {
         }
         stage('sign the container image'){
             steps{
+                withCredentials([sshUserPrivateKey(credentialsId: 'cosign-private-key-with-password', keyFileVariable: 'my_private_key')])
+                {
+                    sh "echo $my_private_key"
+                    
+                    sh "cp ${my_private_key} ./key/my_private_key.key"
+                    sh "cat ./key/my_private_key.key"
+                    
+                }
                 sh 'cosign version'
                 sh 'cosign sign --key ${my_private_key} 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
             }
