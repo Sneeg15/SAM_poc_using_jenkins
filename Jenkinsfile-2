@@ -9,13 +9,14 @@ pipeline {
     stages {
         stage('verification'){
             steps{
-                withCredentials([file(credentialsId: 'COSIGN_PRIVATE_KEY', variable: 'my-private-key'), file(credentialsId: 'COSIGN_PUBLIC_KEY', variable: 'my-public-key')]){
-                    sh "cp \$my-public-key /src/main/resources/my-public-key.pub"
-                    sh "cp \$my-private-key /src/main/resources/my-private-key.key"
+                withCredentials([file(credentialsId: 'COSIGN_PRIVATE_KEY', variable: 'my-private-key'), file(credentialsId: 'COSIGN_PUBLIC_KEY', variable: 'my-public-key')])
+                {
+                    sh "cp \$my-public-key my-public-key.pub"
+                    sh "cp \$my-private-key my-private-key.key"
                     sh "cat my-public-key.pub"
                     sh "cat my-private-key.pub"
-                    sh "echo my-public-key"
-                    sh "echo my-private-key"
+                    sh "echo $my-public-key"
+                    sh "echo $my-private-key"
                 }
             }
         }
@@ -55,12 +56,12 @@ pipeline {
         stage('sign the container image'){
             steps{
                 sh 'cosign version'
-                sh 'cosign sign --key credentials('cosign-private-key') --upload=true 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
+                sh 'cosign sign --key $my-private-key --upload=true 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
             }
         }
         stage('verify the container image'){
             steps{
-                sh 'cosign verify --key $COSIGN_PUBLIC_KEY 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp:lambdafunctionwithapi-1cd246604ecc-python3.7-v1'
+                sh 'cosign verify --key $my-public-key 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp:lambdafunctionwithapi-1cd246604ecc-python3.7-v1'
             }
         }    
     }
