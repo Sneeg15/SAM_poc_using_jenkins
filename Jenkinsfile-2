@@ -60,7 +60,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'cosign-private-key-with-password', keyFileVariable: 'my_private_key')])
                 {
                     sh "echo $my_private_key"
-                    
+                    sh "chmod -R 777 key"
                     sh "cp ${my_private_key} ./key/my_private_key.key"
                     sh "cat ./key/my_private_key.key"
                    
