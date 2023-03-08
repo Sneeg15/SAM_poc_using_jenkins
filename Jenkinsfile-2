@@ -11,8 +11,8 @@ pipeline {
             steps{
                 //sh 'cat COSIGN_PRIVATE_KEY'
                 //sh 'cat COSIGN_PUBLIC_KEY'
-                sh 'cat cosign.key'
-                sh 'cat cosign.pub'
+                //sh 'cat cosign.key'
+                //sh 'cat cosign.pub'
             }
         }
         stage('authentication'){
@@ -51,7 +51,7 @@ pipeline {
         stage('sign the container image'){
             steps{
                 sh 'cosign version'
-                sh 'cosign sign --key $COSIGN_PRIVATE_KEY --upload=true 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
+                sh 'cosign sign --key credentials('cosign-private-key') --upload=true 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
             }
         }
         stage('verify the container image'){
