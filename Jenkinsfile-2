@@ -12,6 +12,10 @@ pipeline {
                 withCredentials([file(credentialsId: 'COSIGN_PRIVATE_KEY', variable: 'my-private-key'), file(credentialsId: 'COSIGN_PUBLIC_KEY', variable: 'my-public-key')]){
                     sh "cp \$my-public-key /src/main/resources/my-public-key.pub"
                     sh "cp \$my-private-key /src/main/resources/my-private-key.key"
+                    sh "cat my-public-key.pub"
+                    sh "cat my-private-key.pub"
+                    sh "echo my-public-key"
+                    sh "echo my-private-key"
                 }
             }
         }
